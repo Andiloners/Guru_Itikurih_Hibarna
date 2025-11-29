@@ -1,0 +1,59 @@
+===========================================
+CARA MENAMBAHKAN LOGO SEKOLAH
+===========================================
+
+LANGKAH 1: SIAPKAN FILE LOGO
+----------------------------
+1. Pastikan Anda memiliki file logo SMK ITIKURIH HIBARNA
+2. Format yang didukung: PNG (disarankan) atau JPG
+3. Ukuran yang disarankan:
+   - Minimal 200x200px untuk kualitas terbaik
+   - Background transparan (untuk PNG) lebih baik
+
+LANGKAH 2: SIMPAN FILE LOGO
+----------------------------
+1. Buka folder aplikasi: C:\xampp\htdocs\administrasi_guru\
+2. Masuk ke folder: assets\images\
+3. Simpan file logo dengan nama: logo.png
+   (atau logo.jpg jika menggunakan format JPG)
+
+   Path lengkap:
+   C:\xampp\htdocs\administrasi_guru\assets\images\logo.png
+
+LANGKAH 3: VERIFIKASI
+---------------------
+1. Buka aplikasi di browser
+2. Logo akan muncul di:
+   - Halaman Login (di atas form)
+   - Dashboard Header (di sebelah kiri)
+3. Jika logo tidak muncul, pastikan:
+   - Nama file tepat: logo.png (huruf kecil)
+   - File ada di folder yang benar
+   - Refresh browser (Ctrl + F5)
+
+CATATAN PENTING:
+----------------
+- Jika logo tidak ditemukan, sistem akan menampilkan icon emoji sebagai fallback
+- Untuk mengubah nama file logo, edit:
+  * index.php (baris ~124)
+  * login.php (baris ~26)
+- Pastikan file logo tidak terlalu besar (maksimal 500KB)
+
+TROUBLESHOOTING:
+----------------
+1. Logo tidak muncul:
+   - Cek nama file harus: logo.png (case sensitive)
+   - Cek path folder: assets/images/
+   - Cek permission file (harus bisa dibaca)
+
+2. Logo terlihat buram:
+   - Gunakan logo dengan resolusi lebih tinggi
+   - Format PNG dengan kualitas tinggi
+
+3. Logo terlalu besar/kecil:
+   - Edit CSS di style.css
+   - Cari: .logo-image atau .logo-image-large
+   - Ubah width dan height sesuai kebutuhan
+
+===========================================
+

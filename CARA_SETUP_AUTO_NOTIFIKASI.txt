@@ -1,0 +1,149 @@
+===========================================
+CARA SETUP AUTO NOTIFIKASI WHATSAPP
+===========================================
+
+Sistem auto notifikasi akan mengirim pesan WhatsApp otomatis setiap 30 menit
+untuk mengingatkan guru yang memiliki data administrasi belum diupload.
+
+===========================================
+CARA 1: WINDOWS (TASK SCHEDULER)
+===========================================
+
+1. Buka Task Scheduler
+   - Tekan Windows + R
+   - Ketik: taskschd.msc
+   - Tekan Enter
+
+2. Buat Task Baru
+   - Klik "Create Basic Task" di panel kanan
+   - Nama: Auto Notifikasi WhatsApp
+   - Deskripsi: Kirim notifikasi WhatsApp otomatis
+   - Klik Next
+
+3. Set Trigger
+   - Pilih "Daily" atau "When the computer starts"
+   - Klik Next
+   - Atau pilih "Repeat task every: 30 minutes"
+   - Klik Next
+
+4. Set Action
+   - Pilih "Start a program"
+   - Klik Next
+   - Program/script: C:\xampp\php\php.exe
+     (atau path PHP Anda)
+   - Add arguments: C:\xampp\htdocs\administrasi_guru\cron_notifikasi.php
+   - Start in: C:\xampp\htdocs\administrasi_guru
+   - Klik Next
+
+5. Finish
+   - Centang "Open the Properties dialog..."
+   - Klik Finish
+   - Di tab "General", centang "Run whether user is logged on or not"
+   - Klik OK
+
+6. Test
+   - Klik kanan task yang baru dibuat
+   - Pilih "Run"
+   - Cek log di folder logs/
+
+===========================================
+CARA 2: LINUX/MAC (CRON JOB)
+===========================================
+
+1. Buka Terminal
+
+2. Edit Crontab
+   crontab -e
+
+3. Tambahkan Baris Berikut:
+   */30 * * * * /usr/bin/php /path/to/administrasi_guru/cron_notifikasi.php >> /path/to/logs/cron.log 2>&1
+
+   Contoh:
+   */30 * * * * /usr/bin/php /var/www/html/administrasi_guru/cron_notifikasi.php >> /var/www/html/administrasi_guru/logs/cron.log 2>&1
+
+4. Simpan dan Keluar
+   - Tekan Ctrl + X
+   - Tekan Y untuk save
+   - Tekan Enter
+
+5. Cek Cron Job
+   crontab -l
+
+6. Test Manual
+   php /path/to/administrasi_guru/cron_notifikasi.php
+
+===========================================
+CARA 3: XAMPP (WINDOWS) - BATCH FILE
+===========================================
+
+1. Buat file: auto_notifikasi.bat
+   Isi dengan:
+   
+   @echo off
+   cd C:\xampp\htdocs\administrasi_guru
+   C:\xampp\php\php.exe cron_notifikasi.php
+   pause
+
+2. Buat Task Scheduler yang menjalankan file .bat ini
+   - Program: C:\xampp\htdocs\administrasi_guru\auto_notifikasi.bat
+   - Trigger: Setiap 30 menit
+
+===========================================
+CARA 4: TEST MANUAL VIA BROWSER
+===========================================
+
+1. Buka browser
+2. Akses: http://localhost/administrasi-guru/cron_notifikasi.php
+3. Cek hasil di halaman atau log file
+
+===========================================
+CARA 5: SETUP VIA WEB INTERFACE
+===========================================
+
+1. Login ke aplikasi
+2. Buka halaman "Notifikasi"
+3. Klik "Setup Auto Notifikasi"
+4. Ikuti instruksi di halaman tersebut
+
+===========================================
+CATATAN PENTING
+===========================================
+
+1. Pastikan PHP bisa diakses via command line
+   - Test: php -v
+
+2. Pastikan folder logs/ bisa ditulis
+   - Folder akan dibuat otomatis
+
+3. Cek log file untuk monitoring:
+   - logs/cron_notifikasi_YYYY-MM-DD.log
+   - logs/whatsapp_queue_YYYY-MM-DD.txt
+
+4. Untuk pengiriman otomatis penuh, perlu:
+   - WhatsApp Business API (berbayar)
+   - Atau service pihak ketiga seperti Twilio
+
+5. Saat ini sistem menggunakan queue file:
+   - File queue disimpan di logs/whatsapp_queue_*.txt
+   - Bisa diintegrasikan dengan WhatsApp API nanti
+
+===========================================
+TROUBLESHOOTING
+===========================================
+
+1. Cron tidak berjalan:
+   - Cek path PHP: which php
+   - Cek permission file: chmod +x cron_notifikasi.php
+   - Cek log file untuk error
+
+2. File log tidak dibuat:
+   - Cek permission folder logs/
+   - Pastikan folder bisa ditulis
+
+3. Notifikasi tidak terkirim:
+   - Pastikan nomor WhatsApp sudah terdaftar
+   - Cek format nomor (harus 62xxxxxxxxxxx)
+   - Cek queue file di logs/
+
+===========================================
+

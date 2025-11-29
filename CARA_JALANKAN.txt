@@ -1,0 +1,109 @@
+===========================================
+CARA MENJALANKAN APLIKASI ADMINISTRASI GURU
+===========================================
+
+LANGKAH 1: SETUP DATABASE (WAJIB!)
+-----------------------------------
+1. Buka XAMPP Control Panel
+2. Start Apache dan MySQL (klik tombol "Start")
+3. Buka browser dan akses phpMyAdmin:
+   http://localhost/phpmyadmin
+   
+4. Import database:
+   - Klik tab "Import" di bagian atas
+   - Klik "Choose File" dan pilih file: database.sql
+     (File ada di: C:\xampp\htdocs\administrasi guru\database.sql)
+   - Klik tombol "Go" di bagian bawah
+   - Pastikan muncul pesan sukses
+
+ATAU menggunakan Command Line:
+   - Buka Command Prompt
+   - Masuk ke folder MySQL bin:
+     cd C:\xampp\mysql\bin
+   - Jalankan perintah:
+     mysql -u root -p < "C:\xampp\htdocs\administrasi guru\database.sql"
+   - Jika ada password, masukkan password MySQL (default: kosong)
+
+
+LANGKAH 2: MENJALANKAN APLIKASI
+--------------------------------
+
+PILIHAN A: MENGGUNAKAN XAMPP (RECOMMENDED)
+-------------------------------------------
+Karena folder sudah ada di C:\xampp\htdocs\administrasi guru\
+
+1. Pastikan Apache sudah berjalan di XAMPP Control Panel
+2. Buka browser (Chrome, Firefox, Edge, dll)
+3. Akses aplikasi dengan salah satu cara:
+   
+   OPSI 1 (dengan spasi di URL):
+   http://localhost/administrasi%20guru/index.php
+   
+   OPSI 2 (lebih mudah, tanpa spasi):
+   - Rename folder menjadi: administrasi-guru (tanpa spasi)
+   - Akses: http://localhost/administrasi-guru/index.php
+
+
+PILIHAN B: MENGGUNAKAN PHP BUILT-IN SERVER
+-------------------------------------------
+1. Buka Command Prompt atau PowerShell
+2. Masuk ke folder aplikasi:
+   cd "C:\xampp\htdocs\administrasi guru"
+   
+3. Jalankan server PHP:
+   php -S localhost:8000
+   
+   ATAU gunakan file batch yang sudah disediakan:
+   - Double klik: start_server.bat
+   - Atau double klik: start_server.ps1
+   
+4. Buka browser dan akses:
+   http://localhost:8000/index.php
+   
+5. JANGAN TUTUP Command Prompt/PowerShell selama menggunakan aplikasi!
+
+
+PILIHAN C: MENGGUNAKAN WAMP
+----------------------------
+1. Pastikan WAMP sudah terinstall
+2. Start WAMP Server (ikon harus hijau)
+3. Copy folder "administrasi guru" ke:
+   C:\wamp64\www\
+   
+4. Rename folder menjadi tanpa spasi, contoh:
+   C:\wamp64\www\administrasi-guru\
+   
+5. Buka browser dan akses:
+   http://localhost/administrasi-guru/index.php
+
+
+TROUBLESHOOTING
+---------------
+Jika masih error:
+
+1. Cek koneksi database:
+   - Pastikan MySQL sudah berjalan di XAMPP
+   - Buka: http://localhost/test_connection.php
+   - Jika error, periksa config.php
+
+2. Cek apakah PHP sudah terinstall:
+   - Buka Command Prompt
+   - Ketik: php -v
+   - Jika tidak muncul, install PHP atau gunakan XAMPP
+
+3. Pastikan port tidak digunakan aplikasi lain:
+   - Untuk PHP built-in server, coba port lain:
+     php -S localhost:8080
+
+4. Cek permission folder uploads:
+   - Pastikan folder uploads/ bisa ditulis
+   - Folder akan dibuat otomatis saat pertama kali diakses
+
+5. Error "Database tidak ditemukan":
+   - Pastikan sudah import database.sql
+   - Cek nama database di config.php harus: administrasi_guru
+
+6. Error "Access denied":
+   - Cek username dan password MySQL di config.php
+   - Default XAMPP: user=root, password=kosong
+
